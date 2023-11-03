@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static int BOARD_SIZE = 3;
+    private static final int BOARD_SIZE = 3;
 
     public static void main(String[] args) {
         System.out.print("Hello and welcome to TicTacToe!");

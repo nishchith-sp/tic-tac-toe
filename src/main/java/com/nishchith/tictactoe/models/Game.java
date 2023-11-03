@@ -1,15 +1,14 @@
 package com.nishchith.tictactoe.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.nishchith.tictactoe.Strategies.winning.ColumnWinningStrategy;
 import com.nishchith.tictactoe.Strategies.winning.DiagonalWinningStrategy;
 import com.nishchith.tictactoe.Strategies.winning.RowWinningStrategy;
 import com.nishchith.tictactoe.Strategies.winning.WinningStrategy;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -129,10 +128,7 @@ public class Game {
 
         private boolean validate() {
             List<Player> players = game.getPlayers();
-            if (players.size() > 2) {
-                return false;
-            }
-            return true;
+            return players.size() <= 2;
         }
 
         public Game build() {

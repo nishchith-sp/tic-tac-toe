@@ -4,8 +4,6 @@ import com.nishchith.tictactoe.models.Board;
 import com.nishchith.tictactoe.models.BoardCell;
 import com.nishchith.tictactoe.models.Symbol;
 
-import java.util.List;
-
 public class DiagonalWinningStrategy implements WinningStrategy {
     @Override
     public boolean checkWinner(Board board, Symbol symbol) {
