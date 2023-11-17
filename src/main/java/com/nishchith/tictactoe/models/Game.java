@@ -1,5 +1,7 @@
 package com.nishchith.tictactoe.models;
 
+import com.nishchith.tictactoe.gameexceptions.InvalidGameException;
+import com.nishchith.tictactoe.gameexceptions.InvalidMoveException;
 import com.nishchith.tictactoe.Strategies.winning.ColumnWinningStrategy;
 import com.nishchith.tictactoe.Strategies.winning.DiagonalWinningStrategy;
 import com.nishchith.tictactoe.Strategies.winning.RowWinningStrategy;
@@ -83,11 +85,11 @@ public class Game {
 
     private void validateMove(BoardCell move) {
         if (move == null) {
-            throw new RuntimeException("");
+            throw new InvalidMoveException();
         }
 
         if (!board.isEmpty(move.getRow(), move.getColumn())) {
-            throw new RuntimeException("");
+            throw new InvalidMoveException();
         }
     }
 
@@ -102,14 +104,12 @@ public class Game {
         return false;
     }
 
-
-
     private boolean checkDraw() {
-        return false;
+        return board.getEmptyCells().isEmpty();
     }
 
     public static class Builder {
-        private Game game;
+        final private Game game;
 
         private Builder() {
             this.game = new Game();
@@ -135,7 +135,7 @@ public class Game {
 
             boolean isValid = validate();
             if (!isValid) {
-                throw new RuntimeException("Game is not valid");
+                throw new InvalidGameException();
             }
 
             return this.game;

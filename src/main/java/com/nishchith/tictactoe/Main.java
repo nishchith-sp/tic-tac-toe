@@ -1,6 +1,9 @@
 package com.nishchith.tictactoe;
 
 import com.nishchith.tictactoe.Strategies.playing.RandomPlayingStrategy;
+import com.nishchith.tictactoe.gameexceptions.GameOverException;
+import com.nishchith.tictactoe.gameexceptions.InvalidGameException;
+import com.nishchith.tictactoe.gameexceptions.InvalidMoveException;
 import com.nishchith.tictactoe.models.*;
 
 import java.util.Scanner;
@@ -22,19 +25,33 @@ public class Main {
         // Iteratively call make move
         // Until -> Game is WON or DRAWN
 
-        while(game.getGameStatus() == GameStatus.IN_PROGRESS) {
-            Player player = game.getNextPlayer();
-            System.out.println("Next player: " + player.getSymbol());
+        while (game.getGameStatus() == GameStatus.IN_PROGRESS) {
+            try {
+                Player player = game.getNextPlayer();
+                System.out.println("Next player: " + player.getSymbol());
 
-            game.makeMove();
-            game.getBoard().printBoard();
+                game.makeMove();
+                game.getBoard().printBoard();
+            } catch (GameOverException | InvalidGameException | InvalidMoveException e) {
+                game.getBoard().printBoard();
+                System.out.println(e.getMessage());
+            }
         }
 
         // Start playing
         //
 
-        if(game.getGameStatus() == GameStatus.FINISHED) {
+        if (game.getGameStatus() == GameStatus.FINISHED) {
+            System.out.println("***********************");
+            System.out.println("*** Congratulations ***");
             System.out.println("Game won by player: " + game.getWinner().getSymbol());
+            System.out.println("***********************");
+        }
+
+        if (game.getGameStatus() == GameStatus.DRAW) {
+            System.out.println("***********************");
+            System.out.println("*** Oh, Its a DRAW. ***");
+            System.out.println("***********************");
         }
     }
 

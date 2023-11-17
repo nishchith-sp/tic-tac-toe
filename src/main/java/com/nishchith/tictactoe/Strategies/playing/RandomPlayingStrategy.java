@@ -1,5 +1,6 @@
 package com.nishchith.tictactoe.Strategies.playing;
 
+import com.nishchith.tictactoe.gameexceptions.GameOverException;
 import com.nishchith.tictactoe.models.Board;
 import com.nishchith.tictactoe.models.BoardCell;
 
@@ -12,6 +13,10 @@ public class RandomPlayingStrategy implements PlayingStrategy {
 
         // Get a list of empty cells
         List<BoardCell> emptyCells = board.getEmptyCells();
+
+        if(emptyCells.isEmpty()){
+            throw new GameOverException();
+        }
 
         // Generate a random index for the cells
         int randomIndex = (int) (Math.random() * emptyCells.size());
